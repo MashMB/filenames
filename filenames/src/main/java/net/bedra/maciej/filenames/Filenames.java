@@ -1,21 +1,46 @@
 package net.bedra.maciej.filenames;
 
-import org.springframework.boot.CommandLineRunner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class Filenames {
+public class Filenames extends Application {
+
+	private ConfigurableApplicationContext springContext;
+	private Parent rootNode;
+	private FXMLLoader fxmlLoader;
 
 	public static void main(String[] args) {
-		SpringApplication.run(Filenames.class, args);
+		launch(args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ApplicationContext applicationContext) {
-		return args -> System.out.println("Hello World!");
+	@Override
+	public void init() throws Exception {
+		springContext = SpringApplication.run(Filenames.class);
+		fxmlLoader = new FXMLLoader();
+		fxmlLoader.setControllerFactory(springContext::getBean);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		fxmlLoader.setLocation(getClass().getResource("/views/main.fxml"));
+		rootNode = fxmlLoader.load();
+		primaryStage.setTitle("Filenames");
+		primaryStage.setResizable(true);
+		Scene scene = new Scene(rootNode, 620, 420);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	@Override
+	public void stop() {
+		springContext.stop();
 	}
 
 }
