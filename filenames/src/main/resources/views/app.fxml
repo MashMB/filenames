@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0"
+<BorderPane fx:controller="net.bedra.maciej.filenames.controllers.AppController" maxHeight="-Infinity"
+	    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0"
 	    prefWidth="620.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 	<padding>
 		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
@@ -21,9 +22,10 @@
 		<Pane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
 			<children>
 				<Label layoutX="14.0" layoutY="14.0" text="Directory"/>
-				<TextField layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="490.0"/>
-				<Button layoutX="520.0" layoutY="31.0" mnemonicParsing="false" prefHeight="25.0"
-					prefWidth="80.0" text="Chose">
+				<TextField fx:id="dirTextField" layoutX="14.0" layoutY="31.0" prefHeight="25.0"
+					   prefWidth="490.0"/>
+				<Button fx:id="choseButton" layoutX="520.0" layoutY="31.0" mnemonicParsing="false"
+					prefHeight="25.0" prefWidth="80.0" text="Chose" onAction="#buttonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
@@ -32,7 +34,7 @@
 		</Pane>
 	</top>
 	<right>
-		<TextArea editable="false" prefHeight="325.0" prefWidth="300.0" wrapText="true"
+		<TextArea fx:id="userLogArea" editable="false" prefHeight="325.0" prefWidth="300.0" wrapText="true"
 			  BorderPane.alignment="CENTER">
 			<cursor>
 				<Cursor fx:constant="DEFAULT"/>
@@ -43,13 +45,14 @@
 		<Pane prefHeight="325.0" prefWidth="300.0" BorderPane.alignment="CENTER">
 			<children>
 				<Label layoutX="14.0" layoutY="14.0" text="Core name"/>
-				<TextField layoutX="14.0" layoutY="29.0" prefHeight="25.0" prefWidth="270.0"
-					   promptText="IMG_"/>
+				<TextField fx:id="coreNameField" layoutX="14.0" layoutY="29.0" prefHeight="25.0"
+					   prefWidth="270.0" promptText="IMG_"/>
 				<Label layoutX="14.0" layoutY="63.0" text="Start number (format)"/>
-				<TextField layoutX="14.0" layoutY="80.0" prefHeight="25.0" prefWidth="270.0"
-					   promptText="0001"/>
-				<RadioButton layoutX="14.0" layoutY="114.0" mnemonicParsing="false" prefWidth="135.0"
-					     selected="true" text="Continous mode">
+				<TextField fx:id="startNumberField" layoutX="14.0" layoutY="80.0" prefHeight="25.0"
+					   prefWidth="270.0" promptText="0001"/>
+				<RadioButton fx:id="continuousMode" layoutX="14.0" layoutY="114.0"
+					     mnemonicParsing="false" prefWidth="135.0" selected="true"
+					     text="Continuous mode" onAction="#radioButtonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
@@ -57,14 +60,16 @@
 						<ToggleGroup fx:id="nameMode"/>
 					</toggleGroup>
 				</RadioButton>
-				<RadioButton layoutX="150.0" layoutY="114.0" mnemonicParsing="false" prefWidth="135.0"
-					     text="All mode" toggleGroup="$nameMode">
+				<RadioButton fx:id="allMode" layoutX="150.0" layoutY="114.0" mnemonicParsing="false"
+					     prefWidth="135.0" text="All mode" toggleGroup="$nameMode"
+					     onAction="#radioButtonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
 				</RadioButton>
-				<RadioButton layoutX="14.0" layoutY="137.0" mnemonicParsing="false" prefWidth="135.0"
-					     selected="true" text="Files with extension">
+				<RadioButton fx:id="extFiles" layoutX="14.0" layoutY="137.0" mnemonicParsing="false"
+					     prefWidth="135.0" selected="true" text="Files with extension"
+					     onAction="#radioButtonsHandler">
 					<toggleGroup>
 						<ToggleGroup fx:id="extMode"/>
 					</toggleGroup>
@@ -72,27 +77,29 @@
 						<Cursor fx:constant="HAND"/>
 					</cursor>
 				</RadioButton>
-				<RadioButton layoutX="149.0" layoutY="137.0" mnemonicParsing="false" prefWidth="135.0"
-					     text="All files" toggleGroup="$extMode">
+				<RadioButton fx:id="allFiles" layoutX="149.0" layoutY="137.0" mnemonicParsing="false"
+					     prefWidth="135.0" text="All files" toggleGroup="$extMode"
+					     onAction="#radioButtonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
 				</RadioButton>
-				<TextField layoutX="14.0" layoutY="163.0" prefWidth="270.0" promptText=".jpg"/>
-				<Button layoutX="14.0" layoutY="198.0" mnemonicParsing="false" prefWidth="130.0"
-					text="Scan">
+				<TextField fx:id="extensionField" layoutX="14.0" layoutY="163.0" prefWidth="270.0"
+					   promptText=".jpg"/>
+				<Button fx:id="scanButton" layoutX="14.0" layoutY="198.0" mnemonicParsing="false"
+					prefWidth="130.0" text="Scan" onAction="#buttonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
 				</Button>
-				<Button layoutX="156.0" layoutY="198.0" mnemonicParsing="false" prefWidth="130.0"
-					text="Start">
+				<Button fx:id="startButton" layoutX="156.0" layoutY="198.0" mnemonicParsing="false"
+					prefWidth="130.0" text="Start" onAction="#buttonsHandler">
 					<cursor>
 						<Cursor fx:constant="HAND"/>
 					</cursor>
 				</Button>
 				<Label alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="234.0" prefHeight="38.0"
-				       prefWidth="270.0" text="Copyright Maciej Bedra, All Rights Reserved."/>
+				       prefWidth="270.0" text="&#169; Copyright Maciej Bedra, All Rights Reserved."/>
 				<Label alignment="TOP_CENTER" layoutX="15.0" layoutY="272.0" prefHeight="38.0"
 				       prefWidth="270.0" text="Reproduction without further permission is prohibited.">
 					<font>
