@@ -26,6 +26,19 @@ public class Filenames extends Application {
 	private static String applicationName;
 
 	/**
+	 * Initialize Spring Boot and JavaFX. Redirect JavaFX control to
+	 * Spring Boot.
+	 */
+	@Override
+	public void init() {
+		log.info("Initializing application...");
+		springContext = SpringApplication.run(Filenames.class);
+		fxmlLoader = new FXMLLoader();
+		fxmlLoader.setControllerFactory(springContext::getBean);
+		log.info("Application initialized");
+	}
+
+	/**
 	 * Main entry point (launch application).
 	 *
 	 * @param args program arguments
@@ -42,19 +55,6 @@ public class Filenames extends Application {
 	@Value("${spring.application.name}")
 	public void setApplicationName(String appName) {
 		applicationName = appName;
-	}
-
-	/**
-	 * Initialize Spring Boot and JavaFX. Redirect JavaFX control to
-	 * Spring Boot.
-	 */
-	@Override
-	public void init() {
-		log.info("Initializing application...");
-		springContext = SpringApplication.run(Filenames.class);
-		fxmlLoader = new FXMLLoader();
-		fxmlLoader.setControllerFactory(springContext::getBean);
-		log.info("Application initialized");
 	}
 
 	/**
