@@ -17,7 +17,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	compileOnly 'org.projectlombok:lombok:1.18.2'
 	apt 'org.projectlombok:lombok:1.18.2'
-	compile files('lib/mblogging-1.1.1.jar')
+	compile files('lib/mblogging-1.1.2.jar')
 }
 
 group 'net.bedra.maciej.filenames'
