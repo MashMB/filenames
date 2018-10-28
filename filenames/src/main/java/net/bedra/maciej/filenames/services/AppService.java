@@ -40,6 +40,35 @@ public class AppService {
 	}
 
 	/**
+	 * Get extension name from raw input.
+	 *
+	 * @param input raw input
+	 * @return String proper file extension
+	 */
+	public String getExtension(String input) {
+		log.info("Getting extension from string [value = {}]", input != null && !input.trim().isEmpty() ? input : null);
+		String extension = null;
+
+		if (input != null && !input.trim().isEmpty()) {
+			String[] splitInput = input.trim().split("\\.");
+
+			if (!(splitInput.length > 2)) {
+				if (splitInput.length == 2) {
+					if (splitInput[0].isEmpty()) {
+						extension = input.trim().toLowerCase().substring(1, input.trim().length());
+					}
+				} else {
+					extension = input.trim().toLowerCase();
+				}
+			}
+		}
+
+		log.info("Extension found [value = {}]", extension);
+
+		return extension;
+	}
+
+	/**
 	 * Check length of pattern for number string.
 	 *
 	 * @param numPattern raw pattern (user input)
