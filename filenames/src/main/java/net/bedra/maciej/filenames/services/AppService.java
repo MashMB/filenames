@@ -46,7 +46,7 @@ public class AppService {
 	 * @return String proper file extension
 	 */
 	public String getExtension(String input) {
-		log.info("Getting extension from string [value = {}]", input != null && !input.trim().isEmpty() ? input : null);
+		log.info("Getting extension from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
 		String extension = null;
 
 		if (input != null && !input.trim().isEmpty()) {
