@@ -15,6 +15,20 @@ public class AppService {
 	private static Logger log = Logger.getLogger();
 
 	/**
+	 * Check length of pattern for number string.
+	 *
+	 * @param numPattern raw pattern (user input)
+	 * @return Integer length of pattern for number string
+	 */
+	public Integer getPatternLength(String numPattern) {
+		log.info("Checking length of pattern for number string [value = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim() : 0);
+		Integer patternLength = numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim().length() : 0;
+		log.info("Length of pattern for number string checked");
+
+		return patternLength;
+	}
+
+	/**
 	 * Check if given path is directory.
 	 *
 	 * @param path path to directory
