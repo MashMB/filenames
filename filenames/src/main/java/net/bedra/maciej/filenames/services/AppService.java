@@ -1,6 +1,8 @@
 package net.bedra.maciej.filenames.services;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import net.bedra.maciej.mblogging.Logger;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,32 @@ public class AppService {
 		log.info("Start sequence number converted [value = {}]", startSeq);
 
 		return startSeq;
+	}
+
+	/**
+	 * Get proper core name of the file from raw input (restrictions
+	 * like in Windows system while creating new folder or file with
+	 * special characters).
+	 *
+	 * @param input raw input
+	 * @return String proper core name of file
+	 */
+	public String getCoreName(String input) {
+		log.info("Getting core name from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
+		String coreName = null;
+
+		if (input != null && !input.trim().isEmpty()) {
+			Pattern restrictedChars = Pattern.compile("(\\\\)|(/)|(:)|(\\*)|(\")|(<)|(>)|(\\|)|(\\s+)");
+			Matcher matcher = restrictedChars.matcher(input.trim());
+
+			if (!matcher.find()) {
+				coreName = input.trim();
+			}
+		}
+
+		log.info("Core name found [value = {}]", coreName);
+
+		return coreName;
 	}
 
 	/**
