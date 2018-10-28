@@ -21,8 +21,8 @@ public class AppService {
 	 * @return boolean logical value if given path is directory
 	 */
 	public boolean isDirectory(String path) {
-		log.info("Checking if path [{}] is directory...", !path.isEmpty() ? path : null);
-		boolean isDir = new File(path).isDirectory();
+		log.info("Checking if path [{}] is directory...", path != null && !path.trim().isEmpty() ? path.trim() : null);
+		boolean isDir = path != null && new File(path).isDirectory();
 		log.info("Path checked [is directory = {}]", isDir);
 
 		return isDir;
