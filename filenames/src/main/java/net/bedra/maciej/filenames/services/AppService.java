@@ -15,6 +15,31 @@ public class AppService {
 	private static Logger log = Logger.getLogger();
 
 	/**
+	 * Convert string number pattern to real number (only numbers >= 0).
+	 *
+	 * @param numPattern number pattern as string
+	 * @return Integer converted pattern
+	 */
+	public Integer convertPattern(String numPattern) {
+		log.info("Converting start sequence pattern to number [pattern = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern : null);
+		Integer startSeq = null;
+
+		try {
+			startSeq = new Integer(numPattern);
+
+			if (startSeq < 0) {
+				startSeq = null;
+			}
+		} catch (Exception ex) {
+			log.error("Invalid number pattern", ex);
+		}
+
+		log.info("Start sequence number converted [value = {}]", startSeq);
+
+		return startSeq;
+	}
+
+	/**
 	 * Check length of pattern for number string.
 	 *
 	 * @param numPattern raw pattern (user input)
