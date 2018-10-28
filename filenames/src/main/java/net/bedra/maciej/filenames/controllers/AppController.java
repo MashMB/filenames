@@ -80,9 +80,12 @@ public class AppController {
 		log.debug("Opening directory chooser...");
 		DirectoryChooser dirChooser = new DirectoryChooser();
 		dirChooser.setTitle("Chose directory");
-		dirChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
 		File chosenDir = dirChooser.showDialog(dirTextField.getScene().getWindow());
-		dirTextField.setText(chosenDir != null ? chosenDir.getAbsolutePath() : "");
+
+		if (chosenDir != null) {
+			dirTextField.setText(chosenDir.getAbsolutePath());
+		}
+
 		log.debug("Directory chosen by directory chooser");
 	}
 
