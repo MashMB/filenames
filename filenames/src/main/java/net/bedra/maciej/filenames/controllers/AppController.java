@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.DirectoryChooser;
+import net.bedra.maciej.filenames.enums.FilesMode;
 import net.bedra.maciej.filenames.services.AppService;
 import net.bedra.maciej.mblogging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,27 @@ public class AppController {
 	}
 
 	/**
+	 * Get chosen by user mode from radio buttons.
+	 *
+	 * @return String complete mode strategy shortcut
+	 */
+	private String getMode() {
+		log.debug("Getting strategy chosen by user...");
+		RadioButton nameRadio = (RadioButton) nameMode.getSelectedToggle();
+		RadioButton extRadio = (RadioButton) extMode.getSelectedToggle();
+		String fullMode = nameRadio.getId() + "," + extRadio.getId();
+		log.debug("Strategy chosen by user [strategy = {}]", fullMode);
+
+		switch (fullMode) {
+			case "allMode,allFiles":
+				return FilesMode.ALL_ALL.getMode();
+
+			default:
+				throw new RuntimeException("Mode do not exists for: " + fullMode + " toggles");
+		}
+	}
+
+	/**
 	 * Handler for all buttons in app window.
 	 *
 	 * @param event button event
@@ -69,6 +91,17 @@ public class AppController {
 		switch (btnId) {
 			case "choseButton":
 				choseDir();
+				break;
+
+			case "scanButton":
+				appService.scan(
+					dirTextField.getText().trim(),
+					coreNameField.getText().trim(),
+					startNumberField.getText().trim(),
+					extensionField.getText().trim(),
+					getMode(),
+					userLogArea
+				);
 				break;
 		}
 	}
