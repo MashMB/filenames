@@ -2,6 +2,7 @@ package net.bedra.maciej.filenames.factories;
 
 import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.implementations.AllAllScanImpl;
+import net.bedra.maciej.filenames.implementations.AllExtensionScanImpl;
 import net.bedra.maciej.filenames.interfaces.ScanInterface;
 
 /**
@@ -12,16 +13,19 @@ import net.bedra.maciej.filenames.interfaces.ScanInterface;
 public class ScanFactory {
 
 	private String directory;
+	private String extension;
 	private TextArea userLogArea;
 
 	/**
 	 * ScanFactory constructor.
 	 *
 	 * @param directory   path to directory
+	 * @param extension   extension of file
 	 * @param userLogArea visible user logs
 	 */
-	public ScanFactory(String directory, TextArea userLogArea) {
+	public ScanFactory(String directory, String extension, TextArea userLogArea) {
 		this.directory = directory;
+		this.extension = extension;
 		this.userLogArea = userLogArea;
 	}
 
@@ -35,6 +39,9 @@ public class ScanFactory {
 		switch (mode) {
 			case "AA":
 				return new AllAllScanImpl(directory, userLogArea);
+
+			case "AE":
+				return new AllExtensionScanImpl(directory, extension, userLogArea);
 
 			default:
 				throw new RuntimeException("Implementation of ScanInterface not found (mode = " + mode + ")");

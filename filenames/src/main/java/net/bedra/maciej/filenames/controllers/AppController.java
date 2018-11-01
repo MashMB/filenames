@@ -74,6 +74,9 @@ public class AppController {
 			case "allMode,allFiles":
 				return FilesMode.ALL_ALL.getMode();
 
+			case "allMode,extFiles":
+				return FilesMode.ALL_EXTENSION.getMode();
+
 			default:
 				throw new RuntimeException("Mode do not exists for: " + fullMode + " toggles");
 		}
