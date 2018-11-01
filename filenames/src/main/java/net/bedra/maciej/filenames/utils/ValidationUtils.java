@@ -41,7 +41,7 @@ public class ValidationUtils {
 
 	/**
 	 * Get proper core name of the file from raw input (restrictions
-	 * like in Windows system while creating new folder or file with
+	 * like in Windows system while creating new directory or file with
 	 * special characters).
 	 *
 	 * @param input raw input
@@ -90,6 +90,29 @@ public class ValidationUtils {
 		}
 
 		log.debug("Extension found [value = {}]", extension);
+
+		return extension;
+	}
+
+	/**
+	 * Get extension name from path of file.
+	 *
+	 * @param path path of file
+	 * @return String file extension
+	 */
+	public static String getExtensionFromPath(String path) {
+		log.debug("Getting file extension from path [path = {}]", path != null && !path.trim().isEmpty() ? path.trim() : null);
+		String extension = null;
+
+		if (path != null && !path.trim().isEmpty()) {
+			int dotIndex = path.trim().lastIndexOf('.');
+
+			if (dotIndex >= 0) {
+				extension = path.trim().substring(dotIndex + 1).toLowerCase();
+			}
+		}
+
+		log.debug("File extension found [value = {}]", extension);
 
 		return extension;
 	}
