@@ -38,7 +38,8 @@ public class AllAllScanImpl implements ScanInterface {
 	public void preformScan() {
 		if (ValidationUtils.isDirectory(directory)) {
 			log.info("Starting scan in mode [allMode,allFiles] for directory [path = {}]...", directory);
-			userLogArea.appendText("Starting scan in directory: " + directory + "...\n");
+			userLogArea.setText("");
+			userLogArea.appendText("Starting scan in directory: " + directory + "\n");
 			long startTime = System.currentTimeMillis();
 			File dir = new File(directory);
 			File[] files = dir.listFiles();
@@ -56,8 +57,8 @@ public class AllAllScanImpl implements ScanInterface {
 			double operationTime = TimeUtils.convertToSeconds(endTime - startTime);
 			log.info("Scan completed in {} seconds", operationTime);
 			userLogArea.appendText("Scan completed in " + operationTime + " seconds\n");
-			log.info("All files in folder [value = {}]", filesQuantity);
-			userLogArea.appendText("All files in folder: " + filesQuantity + "\n");
+			log.info("All files in directory [value = {}]", filesQuantity);
+			userLogArea.appendText("All files in directory: " + filesQuantity + "\n");
 			log.info("Files to rename [value = {}]", filesQuantity);
 			userLogArea.appendText("Files to rename: " + filesQuantity + "\n");
 		} else {
