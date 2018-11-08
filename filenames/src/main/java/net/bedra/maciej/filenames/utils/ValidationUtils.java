@@ -126,7 +126,7 @@ public class ValidationUtils {
 	public static Integer getPatternLength(String numPattern) {
 		log.debug("Checking length of pattern for number string [value = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim() : 0);
 		Integer patternLength = numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim().length() : 0;
-		log.debug("Length of pattern for number string checked");
+		log.debug("Length of pattern for number string checked [length = {}]", patternLength);
 
 		return patternLength;
 	}
