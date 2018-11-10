@@ -106,6 +106,17 @@ public class AppController {
 					userLogArea
 				);
 				break;
+
+			case "startButton":
+				appService.start(
+					dirTextField.getText().trim(),
+					coreNameField.getText().trim(),
+					startNumberField.getText().trim(),
+					extensionField.getText().trim(),
+					getMode(),
+					userLogArea
+				);
+				break;
 		}
 	}
 
