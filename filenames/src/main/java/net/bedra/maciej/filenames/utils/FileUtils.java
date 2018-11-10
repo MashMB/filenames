@@ -7,6 +7,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
 import net.bedra.maciej.mblogging.Logger;
 
 /**
@@ -19,7 +20,32 @@ public class FileUtils {
 	private static Logger log = Logger.getLogger();
 
 	/**
+	 * Convert raw number to sequence with proper length.
+	 *
+	 * @param number sequence raw number
+	 * @param patternLength result pattern length
+	 * @return String converted sequence with proper length
 	 */
+	public static String convertToSequence(Integer number, Integer patternLength) {
+		log.debug("Converting number to sequence [number = {}, patternLength = {}]...", number, patternLength);
+		String sequencePattern = number.toString();
+
+		if (sequencePattern.length() < patternLength) {
+			StringBuilder zeros = new StringBuilder();
+			int lackQuantity = patternLength - sequencePattern.length();
+
+			for (int i = 0; i < lackQuantity; i++) {
+				zeros.append("0");
+			}
+
+			sequencePattern = zeros.append(sequencePattern).toString();
+		}
+
+		log.debug("Number to sequence converted [sequence = {}]", sequencePattern);
+
+		return sequencePattern;
+	}
+
 	/**
 	 * Get extension name from path of file.
 	 *
@@ -80,6 +106,31 @@ public class FileUtils {
 		log.debug("Path checked [is directory = {}]", isDir);
 
 		return isDir;
+	}
+
+	/**
+	 * Rename file with new name.
+	 *
+	 * @param file file to rename
+	 * @param name new name for file
+	 * @return boolean logical value if file was renamed
+	 */
+	public static boolean renameFile(File file, String name) {
+		log.debug("Renaming file [newName = {}, file = {}]...", name, file.getAbsolutePath());
+		String[] splitPath = file.getAbsolutePath().split(Matcher.quoteReplacement(File.separator));
+		String fileNameWithExtension = splitPath[splitPath.length - 1];
+		String fileExtension = getExtension(fileNameWithExtension);
+		StringBuilder fileDirPath = new StringBuilder();
+
+		for (int i = 0; i < splitPath.length - 1; i++) {
+			fileDirPath.append(splitPath[i]).append(File.separator);
+		}
+
+		File newFile = new File(fileDirPath.append(File.separator).append(name).append(".").append(fileExtension).toString());
+		boolean isRenamed = file.renameTo(newFile);
+		log.debug("File renamed [isRenamed = {}, newFile = {}]", isRenamed, newFile.getAbsolutePath());
+
+		return isRenamed;
 	}
 
 	/**
