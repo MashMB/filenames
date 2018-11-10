@@ -4,6 +4,7 @@ import java.io.File;
 import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.interfaces.ScanInterface;
 import net.bedra.maciej.filenames.utils.DialogUtils;
+import net.bedra.maciej.filenames.utils.FileUtils;
 import net.bedra.maciej.filenames.utils.TimeUtils;
 import net.bedra.maciej.filenames.utils.ValidationUtils;
 import net.bedra.maciej.mblogging.Logger;
@@ -36,7 +37,7 @@ public class AllAllScanImpl implements ScanInterface {
 	 */
 	@Override
 	public void preformScan() {
-		if (ValidationUtils.isDirectory(directory)) {
+		if (FileUtils.isDirectory(directory)) {
 			log.info("Starting scan in mode [allMode,allFiles] for directory [path = {}]...", directory);
 			userLogArea.setText("");
 			userLogArea.appendText("Starting scan in directory: " + directory + "\n");
@@ -47,7 +48,7 @@ public class AllAllScanImpl implements ScanInterface {
 
 			if (files != null) {
 				for (File file : files) {
-					if (!ValidationUtils.isDirectory(file.getAbsolutePath())) {
+					if (!FileUtils.isDirectory(file.getAbsolutePath())) {
 						filesQuantity = filesQuantity + 1;
 					}
 				}

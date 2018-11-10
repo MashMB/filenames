@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.interfaces.ScanInterface;
 import net.bedra.maciej.filenames.utils.DialogUtils;
+import net.bedra.maciej.filenames.utils.FileUtils;
 import net.bedra.maciej.filenames.utils.TimeUtils;
 import net.bedra.maciej.filenames.utils.ValidationUtils;
 import net.bedra.maciej.mblogging.Logger;
@@ -34,7 +35,7 @@ public class AllExtensionScanImpl implements ScanInterface {
 	 */
 	public AllExtensionScanImpl(String directory, String extension, TextArea userLogArea) {
 		this.directory = directory;
-		this.extension = ValidationUtils.getExtension(extension);
+		this.extension = ValidationUtils.validateFileExtension(extension);
 		this.userLogArea = userLogArea;
 	}
 
@@ -44,7 +45,7 @@ public class AllExtensionScanImpl implements ScanInterface {
 	 */
 	@Override
 	public void preformScan() {
-		if (ValidationUtils.isDirectory(directory)) {
+		if (FileUtils.isDirectory(directory)) {
 			if (extension != null) {
 				log.info("Starting scan in mode [allMode,extFiles] for extension and directory [extension = {}, path = {}]...", extension, directory);
 				userLogArea.setText("");
@@ -58,9 +59,9 @@ public class AllExtensionScanImpl implements ScanInterface {
 
 				if (allFiles != null) {
 					for (File file : allFiles) {
-						if (!ValidationUtils.isDirectory(file.getAbsolutePath())) {
+						if (!FileUtils.isDirectory(file.getAbsolutePath())) {
 							allFilesQuantity = allFilesQuantity + 1;
-							String fileExtension = ValidationUtils.getExtensionFromPath(file.getAbsolutePath());
+							String fileExtension = FileUtils.getExtension(file.getAbsolutePath());
 
 							if (extension.equals(fileExtension)) {
 								log.info("Extension matched for file [path = {}]", file.getAbsolutePath());

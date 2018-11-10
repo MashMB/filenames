@@ -1,6 +1,5 @@
 package net.bedra.maciej.filenames.utils;
 
-import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.bedra.maciej.mblogging.Logger;
@@ -15,40 +14,29 @@ public class ValidationUtils {
 	private static Logger log = Logger.getLogger();
 
 	/**
-	 * Convert string number pattern to real number (only numbers >= 0).
+	 * Check length of pattern for string number sequence.
 	 *
-	 * @param numPattern number pattern as string
-	 * @return Integer converted pattern
+	 * @param numPattern raw pattern (user input)
+	 * @return Integer length of pattern for string number sequence
 	 */
-	public static Integer convertPattern(String numPattern) {
-		log.debug("Converting start sequence pattern to number [pattern = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern : null);
-		Integer startSeq = null;
+	public static Integer getSequencePatternLength(String numPattern) {
+		log.debug("Checking length of pattern for string number sequence [value = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim() : 0);
+		Integer patternLength = numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim().length() : 0;
+		log.debug("Length of pattern for string number sequence checked [length = {}]", patternLength);
 
-		try {
-			startSeq = new Integer(numPattern);
-
-			if (startSeq < 0) {
-				startSeq = null;
-			}
-		} catch (Exception ex) {
-			log.error("Invalid number pattern", ex);
-		}
-
-		log.debug("Start sequence number converted [value = {}]", startSeq);
-
-		return startSeq;
+		return patternLength;
 	}
 
 	/**
-	 * Get proper core name of the file from raw input (restrictions
-	 * like in Windows system while creating new directory or file with
-	 * special characters).
+	 * Validate and get proper core name of the file from raw input
+	 * (restrictions like in Windows system while creating new
+	 * directory or file with special characters).
 	 *
 	 * @param input raw input
-	 * @return String proper core name of file
+	 * @return String validated proper core name of file
 	 */
-	public static String getCoreName(String input) {
-		log.debug("Getting core name from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
+	public static String validateCoreName(String input) {
+		log.debug("Validating and getting core name from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
 		String coreName = null;
 
 		if (input != null && !input.trim().isEmpty()) {
@@ -60,19 +48,19 @@ public class ValidationUtils {
 			}
 		}
 
-		log.debug("Core name found [value = {}]", coreName);
+		log.debug("Core name validated [value = {}]", coreName);
 
 		return coreName;
 	}
 
 	/**
-	 * Get extension name from raw input.
+	 * Validate and get extension name from raw input.
 	 *
 	 * @param input raw input
-	 * @return String proper file extension
+	 * @return String validated file extension
 	 */
-	public static String getExtension(String input) {
-		log.debug("Getting extension from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
+	public static String validateFileExtension(String input) {
+		log.debug("Validating and getting extension from string [value = {}]", input != null && !input.trim().isEmpty() ? input.trim() : null);
 		String extension = null;
 
 		if (input != null && !input.trim().isEmpty()) {
@@ -89,60 +77,35 @@ public class ValidationUtils {
 			}
 		}
 
-		log.debug("Extension found [value = {}]", extension);
+		log.debug("Extension validated [value = {}]", extension);
 
 		return extension;
 	}
 
 	/**
-	 * Get extension name from path of file.
+	 * Validate and convert string sequence pattern to real number
+	 * (only numbers >= 0).
 	 *
-	 * @param path path of file
-	 * @return String file extension
+	 * @param numPattern sequence pattern as string
+	 * @return Integer validated and converted pattern
 	 */
-	public static String getExtensionFromPath(String path) {
-		log.debug("Getting file extension from path [path = {}]", path != null && !path.trim().isEmpty() ? path.trim() : null);
-		String extension = null;
+	public static Integer validateSequencePattern(String numPattern) {
+		log.debug("Validating sequence pattern and converting it to number [pattern = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern : null);
+		Integer startSeq = null;
 
-		if (path != null && !path.trim().isEmpty()) {
-			int dotIndex = path.trim().lastIndexOf('.');
+		try {
+			startSeq = new Integer(numPattern);
 
-			if (dotIndex >= 0) {
-				extension = path.trim().substring(dotIndex + 1).toLowerCase();
+			if (startSeq < 0) {
+				startSeq = null;
 			}
+		} catch (Exception ex) {
+			log.error("Invalid sequence pattern", ex);
 		}
 
-		log.debug("File extension found [value = {}]", extension);
+		log.debug("Sequence number validated and converted [value = {}]", startSeq);
 
-		return extension;
-	}
-
-	/**
-	 * Check length of pattern for number string.
-	 *
-	 * @param numPattern raw pattern (user input)
-	 * @return Integer length of pattern for number string
-	 */
-	public static Integer getPatternLength(String numPattern) {
-		log.debug("Checking length of pattern for number string [value = {}]...", numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim() : 0);
-		Integer patternLength = numPattern != null && !numPattern.trim().isEmpty() ? numPattern.trim().length() : 0;
-		log.debug("Length of pattern for number string checked [length = {}]", patternLength);
-
-		return patternLength;
-	}
-
-	/**
-	 * Check if given path is directory.
-	 *
-	 * @param path path to directory
-	 * @return boolean logical value if given path is directory
-	 */
-	public static boolean isDirectory(String path) {
-		log.debug("Checking if path [{}] is directory...", path != null && !path.trim().isEmpty() ? path.trim() : null);
-		boolean isDir = path != null && new File(path).isDirectory();
-		log.debug("Path checked [is directory = {}]", isDir);
-
-		return isDir;
+		return startSeq;
 	}
 
 }

@@ -19,6 +19,31 @@ public class FileUtils {
 	private static Logger log = Logger.getLogger();
 
 	/**
+	 */
+	/**
+	 * Get extension name from path of file.
+	 *
+	 * @param path path of file
+	 * @return String file extension
+	 */
+	public static String getExtension(String path) {
+		log.debug("Getting file extension from path [path = {}]", path != null && !path.trim().isEmpty() ? path.trim() : null);
+		String extension = null;
+
+		if (path != null && !path.trim().isEmpty()) {
+			int dotIndex = path.trim().lastIndexOf('.');
+
+			if (dotIndex >= 0) {
+				extension = path.trim().substring(dotIndex + 1).toLowerCase();
+			}
+		}
+
+		log.debug("File extension found [value = {}]", extension);
+
+		return extension;
+	}
+
+	/**
 	 * Get file creation date (note that this will not work on most of
 	 * the unix systems because of no information about file creation
 	 * date on some kind of file systems for example ext partitions).
@@ -44,13 +69,27 @@ public class FileUtils {
 	}
 
 	/**
+	 * Check if given path is directory.
+	 *
+	 * @param path path to directory
+	 * @return boolean logical value if given path is directory
+	 */
+	public static boolean isDirectory(String path) {
+		log.debug("Checking if path [{}] is directory...", path != null && !path.trim().isEmpty() ? path.trim() : null);
+		boolean isDir = path != null && new File(path).isDirectory();
+		log.debug("Path checked [is directory = {}]", isDir);
+
+		return isDir;
+	}
+
+	/**
 	 * Ascending sort list of files by creation date.
 	 *
 	 * @param files list of files to sort
 	 * @return List sorted list of files by creation date ascending
 	 */
 	public static List<File> sortByCreationDateAsc(List<File> files) {
-		log.debug("Sorting list of files...");
+		log.debug("Sorting list of files by creation date in ascending order...");
 
 		files.sort((f1, f2) -> {
 			Long f1CreationTime = getFileCreationMills(f1);
