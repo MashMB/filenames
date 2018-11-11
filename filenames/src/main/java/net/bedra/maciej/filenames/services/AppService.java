@@ -51,7 +51,7 @@ public class AppService {
 	 */
 	public void start(String directory, String coreName, String startNumber, String extension, String mode, TextArea userLogArea) {
 		log.info("Starting rename operation...");
-		RenameFactory factory = new RenameFactory(directory, coreName, startNumber, userLogArea);
+		RenameFactory factory = new RenameFactory(directory, coreName, startNumber, extension, userLogArea);
 		RenameInterface impl = factory.getImplementation(mode);
 		impl.startRenaming();
 		log.info("Rename operation completed");
