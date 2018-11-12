@@ -4,6 +4,7 @@ import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.implementations.AllAllScanImpl;
 import net.bedra.maciej.filenames.implementations.AllExtensionScanImpl;
 import net.bedra.maciej.filenames.implementations.ContinuousAllScanImpl;
+import net.bedra.maciej.filenames.implementations.ContinuousExtensionScanImpl;
 import net.bedra.maciej.filenames.interfaces.ScanInterface;
 
 /**
@@ -53,6 +54,9 @@ public class ScanFactory {
 
 			case "CA":
 				return new ContinuousAllScanImpl(directory, coreNameValue, startNumberValue, userLogArea);
+
+			case "CE":
+				return new ContinuousExtensionScanImpl(directory, coreNameValue, startNumberValue, extension, userLogArea);
 
 			default:
 				throw new RuntimeException("Implementation of ScanInterface not found (mode = " + mode + ")");

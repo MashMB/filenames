@@ -80,6 +80,9 @@ public class AppController {
 			case "continuousMode,allFiles":
 				return FilesMode.CONTINUOUS_ALL.getMode();
 
+			case "continuousMode,extFiles":
+				return FilesMode.CONTINUOUS_EXTENSION.getMode();
+
 			default:
 				throw new RuntimeException("Mode do not exists for: " + fullMode + " toggles");
 		}
