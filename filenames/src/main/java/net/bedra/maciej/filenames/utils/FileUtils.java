@@ -95,6 +95,28 @@ public class FileUtils {
 	}
 
 	/**
+	 * Get raw name of file (without extension).
+	 *
+	 * @param file file to analyse
+	 * @return String raw name of file (without extension)
+	 */
+	public static String getFileName(File file) {
+		log.debug("Getting file name from path [path = {}]...", file.getAbsolutePath());
+		String[] splitPath = file.getAbsolutePath().split(Matcher.quoteReplacement(File.separator));
+		String fileNameWithExtension = splitPath[splitPath.length - 1];
+		int lastDotIndex = fileNameWithExtension.lastIndexOf('.');
+		String rawFileName = null;
+
+		if (lastDotIndex > 0) {
+			rawFileName = fileNameWithExtension.substring(0, lastDotIndex);
+		}
+
+		log.debug("Filename without extension processed [value = {}]", rawFileName);
+
+		return rawFileName;
+	}
+
+	/**
 	 * Check if given path is directory.
 	 *
 	 * @param path path to directory
