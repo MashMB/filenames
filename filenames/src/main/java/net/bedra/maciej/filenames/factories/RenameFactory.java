@@ -4,6 +4,7 @@ import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.implementations.AllAllRenameImpl;
 import net.bedra.maciej.filenames.implementations.AllExtensionRenameImpl;
 import net.bedra.maciej.filenames.implementations.ContinuousAllRenameImpl;
+import net.bedra.maciej.filenames.implementations.ContinuousExtensionRenameImpl;
 import net.bedra.maciej.filenames.interfaces.RenameInterface;
 
 /**
@@ -55,6 +56,9 @@ public class RenameFactory {
 
 			case "CA":
 				return new ContinuousAllRenameImpl(directory, coreNameValue, startNumberValue, userLogArea);
+
+			case "CE":
+				return new ContinuousExtensionRenameImpl(directory, coreNameValue, startNumberValue, extension, userLogArea);
 
 			default:
 				throw new RuntimeException("Implementation of RenameInterface not found (mode = " + mode + ")");
