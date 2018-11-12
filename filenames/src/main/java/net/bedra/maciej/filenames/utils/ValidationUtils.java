@@ -83,6 +83,46 @@ public class ValidationUtils {
 	}
 
 	/**
+	 * Check if filename meets pattern requirements.
+	 *
+	 * @param fileName        filename of file
+	 * @param coreName        core name of file (must be equal to
+	 *                        core of filename)
+	 * @param sequencePattern pattern of sequence number
+	 *                        (filename must contain number pattern with
+	 *                        proper length)
+	 * @return boolean logical value if filename of file meets
+	 * pattern requirements
+	 */
+	public static boolean validatePatternsEquality(String fileName, String coreName, String sequencePattern) {
+		log.debug("Validating pattern equality [fileName = {}, coreName = {}, sequencePattern = {}]...", fileName, coreName, sequencePattern);
+		boolean isValid = false;
+		Integer coreNameLength = coreName.length();
+		Integer sequencePatternLength = sequencePattern.length();
+
+		if (fileName != null && fileName.length() >= (coreNameLength + sequencePatternLength)) {
+			String fileCoreName = fileName.substring(0, coreNameLength);
+
+			if (fileCoreName.equals(coreName)) {
+				String fileSequencePattern = fileName.substring(fileCoreName.length());
+				Integer validatedFileSequencePattern = validateSequencePattern(fileSequencePattern);
+
+				if (validatedFileSequencePattern != null) {
+					Integer lengthOfValidatedFileSequencePattern = getSequencePatternLength(fileSequencePattern);
+
+					if (lengthOfValidatedFileSequencePattern != null && lengthOfValidatedFileSequencePattern >= sequencePatternLength) {
+						isValid = true;
+					}
+				}
+			}
+		}
+
+		log.debug("Pattern equality checked [isEqual = {}]", isValid);
+
+		return isValid;
+	}
+
+	/**
 	 * Validate and convert string sequence pattern to real number
 	 * (only numbers >= 0).
 	 *
