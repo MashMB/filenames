@@ -28,7 +28,8 @@ public class AllAllRenameImpl implements RenameInterface {
 	/**
 	 * AllAllRenameImpl constructor.
 	 *
-	 * @param directory        path to directory to preform rename operation
+	 * @param directory        path to directory to preform rename
+	 *                         operation
 	 * @param coreNameValue    raw value of core name (renaming
 	 *                         pattern)
 	 * @param startNumberValue raw value of start number pattern
