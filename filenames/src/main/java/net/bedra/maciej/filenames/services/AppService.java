@@ -31,7 +31,7 @@ public class AppService {
 	 */
 	public void scan(String directory, String coreName, String startNumber, String extension, String mode, TextArea userLogArea) {
 		log.info("Starting scan operation...");
-		ScanFactory factory = new ScanFactory(directory, extension, userLogArea);
+		ScanFactory factory = new ScanFactory(directory, coreName, startNumber, extension, userLogArea);
 		ScanInterface impl = factory.getImplementation(mode);
 		impl.preformScan();
 		log.info("Scan operation completed");

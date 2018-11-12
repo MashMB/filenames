@@ -3,6 +3,7 @@ package net.bedra.maciej.filenames.factories;
 import javafx.scene.control.TextArea;
 import net.bedra.maciej.filenames.implementations.AllAllScanImpl;
 import net.bedra.maciej.filenames.implementations.AllExtensionScanImpl;
+import net.bedra.maciej.filenames.implementations.ContinuousAllScanImpl;
 import net.bedra.maciej.filenames.interfaces.ScanInterface;
 
 /**
@@ -13,18 +14,25 @@ import net.bedra.maciej.filenames.interfaces.ScanInterface;
 public class ScanFactory {
 
 	private String directory;
+	private String coreNameValue;
+	private String startNumberValue;
 	private String extension;
 	private TextArea userLogArea;
 
 	/**
 	 * ScanFactory constructor.
 	 *
-	 * @param directory   path to directory
-	 * @param extension   extension of file
-	 * @param userLogArea visible user logs
+	 * @param directory        path to directory
+	 * @param coreNameValue    raw value of core name (renaming
+	 *                         pattern)
+	 * @param startNumberValue raw value of start number pattern
+	 * @param extension        extension of file
+	 * @param userLogArea      visible user logs
 	 */
-	public ScanFactory(String directory, String extension, TextArea userLogArea) {
+	public ScanFactory(String directory, String coreNameValue, String startNumberValue, String extension, TextArea userLogArea) {
 		this.directory = directory;
+		this.coreNameValue = coreNameValue;
+		this.startNumberValue = startNumberValue;
 		this.extension = extension;
 		this.userLogArea = userLogArea;
 	}
@@ -42,6 +50,9 @@ public class ScanFactory {
 
 			case "AE":
 				return new AllExtensionScanImpl(directory, extension, userLogArea);
+
+			case "CA":
+				return new ContinuousAllScanImpl(directory, coreNameValue, startNumberValue, userLogArea);
 
 			default:
 				throw new RuntimeException("Implementation of ScanInterface not found (mode = " + mode + ")");
