@@ -85,13 +85,9 @@ public class AllExtensionRenameImpl implements RenameInterface {
 							for (File file : allFiles) {
 								if (!FileUtils.isDirectory(file.getAbsolutePath())) {
 									allFilesQuantity = allFilesQuantity + 1;
-									String fileExtension = FileUtils.getExtension(file.getAbsolutePath());
 
-									if (extension.equals(fileExtension)) {
-										log.info("Extension matched for file [path = {}]", file.getAbsolutePath());
+									if (FileUtils.areExtensionsEqual(file, extension)) {
 										filesToRename.add(file);
-									} else {
-										log.info("Extension not matched for file [path = {}]", file.getAbsolutePath());
 									}
 								}
 							}

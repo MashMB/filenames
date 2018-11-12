@@ -20,9 +20,30 @@ public class FileUtils {
 	private static Logger log = Logger.getLogger();
 
 	/**
+	 * Check if file has concrete extension.
+	 *
+	 * @param file      file to analyse
+	 * @param extension extension pattern (file should have it)
+	 * @return boolean logical value if file has proper extension
+	 */
+	public static boolean areExtensionsEqual(File file, String extension) {
+		log.debug("Checking if file has pattern extension [pattern = {}, path = {}]...", extension, file.getAbsolutePath());
+		boolean isEqual = false;
+		String fileExtension = getExtension(file.getAbsolutePath());
+
+		if (extension.equals(fileExtension)) {
+			isEqual = true;
+		}
+
+		log.debug("Extension checked [isEqual = {}]", isEqual);
+
+		return isEqual;
+	}
+
+	/**
 	 * Convert raw number to sequence with proper length.
 	 *
-	 * @param number sequence raw number
+	 * @param number        sequence raw number
 	 * @param patternLength result pattern length
 	 * @return String converted sequence with proper length
 	 */
