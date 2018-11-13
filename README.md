@@ -31,8 +31,8 @@ you can modify source files as you want. Maybe in future there
 will be Unix support added. Before using I highly recommend to
 read all the docs and test how application works on smaller amount
 of files (some kind of test group) because you can make a lot
-of mess in your file system. At the bottom of this README you
-will find link to latest version with always up to date changelog.
+of mess in your file system. At the bottom of this **README** you
+will find link to the latest version with always up to date changelog.
 
 ## How it works
 After successful installation you will see exactly the same window
@@ -44,7 +44,7 @@ as this shown above. You need to fill some gaps before usage:
 
 * **Start number (format)** - pattern of sequence number that also will be first number for numeration, with core name it will create full name like: **IMG_0001**, **VID_010** or **test-10**
 
-* **Extension (field below radio buttons)** - extensions for files that should be renamed
+* **Extension (field below radio buttons)** - extension of files that should be renamed
 
 Application can work in 4 modes:
 
@@ -63,13 +63,15 @@ your file system. It will scan directory in chosen mode for you
 and show statistics in the text box on the right.
 
 Using rename operation (Start button) will rename files in chosen
-directory with given pattern by user (files to rename will be sorted 
+directory with given by user pattern (files to rename will be sorted 
 in ascending order by **file creation date**). All statistics of 
-operation will be showed in the text box on the right.
+operation will be shown in the text box on the right.
 
 ### 1. Continuous mode, Files with extension
 Extension specified by user: **txt**
+
 Core name specified by user: **text_file_**
+
 Start number (format) specified by user: **0001**
 
 Directory before rename operation:
@@ -108,6 +110,7 @@ test_directory
 
 ### 2. Continuous mode, All Files
 Core name specified by user: **renamed-**
+
 Start number (format) specified by user: **010**
 
 Directory before rename operation:
@@ -146,7 +149,9 @@ test_directory
 
 ### 3. All mode, Files with extension
 Extension specified by user: **pdf**
+
 Core name specified by user: **doc_**
+
 Start number (format) specified by user: **02**
 
 Directory before rename operation:
@@ -185,6 +190,7 @@ test_directory
 
 ### 4. All mode, All Files
 Core name specified by user: **test**
+
 Start number (format) specified by user: **0012**
 
 Directory before rename operation:
