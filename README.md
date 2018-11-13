@@ -1,6 +1,6 @@
 # Filenames
 <p align="center">
-	<img src = "img/filenames_ui.png" />
+	<img src = "img/filenames_ui.PNG" />
 </p>
 
 Simple JavaFX + Spring Boot application to rename large group 
