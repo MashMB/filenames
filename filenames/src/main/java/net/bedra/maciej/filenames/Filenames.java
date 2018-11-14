@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.bedra.maciej.mblogging.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,10 +68,12 @@ public class Filenames extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		log.info("Starting application...");
+		Image appIcon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
 		fxmlLoader.setLocation(getClass().getResource("/views/app.fxml"));
 		Parent root = fxmlLoader.load();
 		stage.setScene(new Scene(root));
 		stage.setTitle(applicationName);
+		stage.getIcons().add(appIcon);
 		stage.setResizable(false);
 		stage.show();
 		log.info("Application started");
