@@ -228,10 +228,35 @@ test_directory
 ```
 
 ## Installation
+Installation is really easy. You should do it in the same way as you
+are installing any other software on your computer. This application
+contains installation setup file that will unpack all of necessary
+resources in chosen directory. Last three releases are described on the
+section below. It is highly recommended to install the newest
+version of the application and delete old one from your computer 
+if you installed any before.
 
-## Release and changelog
+**Windows installer only**
+
+**Java 8 in version >= 1.8.0 is required.**
+
+[DOWNLOAD](https://github.com/MashMB/filenames/releases)
+
+## Releases and changelog
+**1.0.0**:
+* First release
 
 ## Bugs and issues
+As any other open source piece of software created with private
+preferences, **Filenames** application can have some unknown
+bugs or issues. I really like to have my code free of any malfunctions
+so do not be scared to post an issue description on the [issues section](https://github.com/MashMB/filenames/issues)
+
+In the installation directory you will find file named *filenames.log*.
+It will be really helpful if you can post content of it in issue description.
+
+I am also opened for suggestions about new features so you
+can post your ideas on the [issues section](https://github.com/MashMB/filenames/issues) too.
 
 ## License
 The MIT License (MIT)
